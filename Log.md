@@ -51,3 +51,21 @@ Começar o projeto de vez
 
 **Linhas de código escritas (estimativa):**
 20
+
+## == Sessão 1 – 04/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Consegui implementar o ncurses definitivamente
+- Criei o tabuleiro
+
+**Maior dificuldade:**
+O vscode não consegue ler bem o ncurses
+
+**Como resolvi (ou não resolvi):**
+Estou a usar o MSYS2 Clang64 para rodar o código
+
+**Próximo passo planeado:**
+Criar as peças de xadrez
+
+**Linhas de código escritas (estimativa):**
+~50
