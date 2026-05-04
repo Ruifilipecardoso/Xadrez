@@ -1,3 +1,4 @@
+#define NCURSES_STATIC
 #include <ncurses.h>
 
 int main() {
@@ -5,6 +6,8 @@ int main() {
 
     raw();
     noecho();
-    keypad(stdscr, true);
+    keypad(stdscr, TRUE);
     curs_set(0);
+    getch();
+    endwin();
 }
