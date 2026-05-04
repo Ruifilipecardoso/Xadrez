@@ -33,3 +33,21 @@ Criar a main
 
 **Linhas de código escritas (estimativa):**
 20
+
+## == Sessão 1 – 04/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Consegui implementar o ncurses
+- ...
+
+**Maior dificuldade:**
+Pôr o vscode a conseguir ler o ncurses
+
+**Como resolvi (ou não resolvi):**
+Muitos comandos e trocas de ficheiros
+
+**Próximo passo planeado:**
+Começar o projeto de vez
+
+**Linhas de código escritas (estimativa):**
+20
