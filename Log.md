@@ -69,3 +69,21 @@ Criar as peças de xadrez
 
 **Linhas de código escritas (estimativa):**
 ~50
+
+## == Sessão 2 – 06/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Criei os ficheiros Tabuleiro.h e main.c
+- ...
+
+**Maior dificuldade:**
+Não consegui que as casas cinzentas do tabuleiro se tornassem brancas.
+
+**Como resolvi (ou não resolvi):**
+Tentei varios métudos mas falhei.
+
+**Próximo passo planeado:**
+Criar as peças de xadrez
+
+**Linhas de código escritas (estimativa):**
+...
