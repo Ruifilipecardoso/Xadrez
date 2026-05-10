@@ -87,3 +87,22 @@ Criar as peças de xadrez
 
 **Linhas de código escritas (estimativa):**
 ...
+
+
+## == Sessão 3 – 09-10/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Criei as peças, mas ainda não se movem
+- ...
+
+**Maior dificuldade:**
+Posicionar as peças no sítio certo, principalmente os peões.
+
+**Como resolvi (ou não resolvi):**
+Concegui resolver trocando o símbolo do peão por uma que não tinha esse problema
+
+**Próximo passo planeado:**
+Pôr as peças a mexer
+
+**Linhas de código escritas (estimativa):**
++100

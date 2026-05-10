@@ -4,8 +4,8 @@
 
 #include <ncurses.h>
 
-#define LARGURA_CASA 6
-#define ALTURA_CASA 3
+#define LARGURA_CASA 2
+#define ALTURA_CASA 1
 #define MARGEM_Y 2
 #define MARGEM_X 5
 
