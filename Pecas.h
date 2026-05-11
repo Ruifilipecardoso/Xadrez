@@ -14,9 +14,9 @@
 #define RAINHA 5
 #define REI 6
 
-void cor_peca(int cor, int y, int x);
+void cor_peca(int cor, int y, int x, int cursor_y, int cursor_x, int selecionado_y, int selecionado_x);
 
-void desenhar_peca(int y, int x, int tipo, int cor);
+void desenhar_peca(int y, int x, int tipo, int cor, int cursor_y, int cursor_x, int selecionado_y, int selecionado_x);
 
 void desenhar_peao(int y, int x);
 void desenhar_torre(int y, int x);

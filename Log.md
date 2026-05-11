@@ -125,3 +125,21 @@ Implementar as regras.
 
 **Linhas de código escritas (estimativa):**
 ~100
+
+## == Sessão 4 – 11/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Aperfeiçoei o selecionador.
+- ...
+
+**Maior dificuldade:**
+Não tive nenhuma dificuldade significativa.
+
+**Como resolvi (ou não resolvi):**
+Hieraquias ao desenhar a casa
+
+**Próximo passo planeado:**
+Implementar as regras.
+
+**Linhas de código escritas (estimativa):**
+~50

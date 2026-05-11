@@ -63,7 +63,7 @@ void desenhar_grelha(int cursor_y, int cursor_x, int selecionado_y, int selecion
                 int cor = (peca_valor >= 20) ? PRETO : BRANCO;
 
 
-                desenhar_peca(y, x, tipo, cor);
+                desenhar_peca(y, x, tipo, cor, cursor_y, cursor_x, selecionado_y, selecionado_x);
             }
 
 
