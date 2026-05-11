@@ -106,3 +106,22 @@ Pôr as peças a mexer
 
 **Linhas de código escritas (estimativa):**
 +100
+
+
+## == Sessão 4 – 11/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Criei o selecionador de casa e peça.
+- As peças mexem-se, mas sem regras.
+
+**Maior dificuldade:**
+Não tive nenhuma dificuldade significativa.
+
+**Como resolvi (ou não resolvi):**
+...
+
+**Próximo passo planeado:**
+Implementar as regras.
+
+**Linhas de código escritas (estimativa):**
+~100

@@ -16,6 +16,9 @@ void inicializar_cores() {
 
     init_pair(2, COLOR_WHITE, COLOR_WHITE);
 
+    init_pair(7, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(8, COLOR_BLACK, COLOR_GREEN);
+
     //Com as peças brancas
     init_pair(3, COLOR_YELLOW, COLOR_BLUE);
     init_pair(4, COLOR_YELLOW, COLOR_WHITE);
@@ -26,22 +29,32 @@ void inicializar_cores() {
 }
 
 //Grelha
-void desenhar_grelha() {
+void desenhar_grelha(int cursor_y, int cursor_x, int selecionado_y, int selecionado_x) {
     for (int y = 0; y < 8; y++) {
         for (int x = 0; x < 8; x++) {
-            //Alterna a cor com base na posição
-            if ((x + y) % 2 == 0) {
-                attron(COLOR_PAIR(1));
+            int cor_da_casa;
+
+            if (y == cursor_y && x == cursor_x) {
+                cor_da_casa = 7;
+            } else if (y == selecionado_y && x == selecionado_x) {
+                cor_da_casa = 8;
+            } else if ((x + y) % 2 == 0) {
+                cor_da_casa = 1;
             } else {
-                attron(COLOR_PAIR(2));
+                cor_da_casa = 2;
             }
+
+            //Alterna a cor com base na posição
+
+            attron(COLOR_PAIR(cor_da_casa));
+
             //Desenha a casa
             for (int i = 0; i < ALTURA_CASA; i++) {
                 mvprintw(MARGEM_Y + (y * ALTURA_CASA) + i, MARGEM_X + (x * LARGURA_CASA), "  ");
             }
 
-            attroff(COLOR_PAIR(1));
-            attroff(COLOR_PAIR(2));
+            attroff(COLOR_PAIR(cor_da_casa));
+            
 
             int peca_valor = tabuleiro_estado[y][x];
 

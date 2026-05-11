@@ -36,3 +36,8 @@ void inicializar_jogo() {
     tabuleiro_estado[7][6] = CAVALO + BRANCO;
     tabuleiro_estado[7][7] = TORRE + BRANCO;
 }
+
+void mover_peca(int oy, int ox, int dy, int dx) {
+    tabuleiro_estado[dy][dx] = tabuleiro_estado[oy][ox];
+    tabuleiro_estado[oy][ox] = VAZIO;
+}
