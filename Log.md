@@ -143,3 +143,21 @@ Implementar as regras.
 
 **Linhas de código escritas (estimativa):**
 ~50
+
+## == Sessão 5 – 12/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Movimento do Peão finalizada
+- ...
+
+**Maior dificuldade:**
+Não tive nenhuma dificuldade significativa.
+
+**Como resolvi (ou não resolvi):**
+...
+
+**Próximo passo planeado:**
+Implementar as regras da Torre
+
+**Linhas de código escritas (estimativa):**
+~50

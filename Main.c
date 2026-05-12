@@ -47,9 +47,14 @@ int main() {
                     selecionado_y = cursor_y;
                     selecionado_x = cursor_x;
                 } else {
-                    //Mover Peça
-                    mover_peca(selecionado_y, selecionado_x, cursor_y, cursor_x);
-                    selecionado_x = -1;
+                    if (validar_movimento(selecionado_y, selecionado_x, cursor_y, cursor_x) == 1) {
+                        //Mover Peça
+                        mover_peca(selecionado_y, selecionado_x, cursor_y, cursor_x);
+                        selecionado_x = -1;
+                    } else {
+                        selecionado_x = -1;
+                    }
+                    
                 }
                 break;
         }

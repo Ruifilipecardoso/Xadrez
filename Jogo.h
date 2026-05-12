@@ -9,8 +9,11 @@ extern int tabuleiro_estado[8][8];
 //Funções de lógica
 void inicializar_jogo();
 
+int validar_peao(int oy, int ox, int dy, int dx, int cor);
 
-int validar_movimento(int origem_y, int origem_x, int destino_y, int destino_x);
+int validar_torre(int oy, int ox, int dy, int dx);
+
+int validar_movimento(int oy, int ox, int dy, int dx);
 
 void mover_peca(int oy, int ox, int dy, int dx);
 
