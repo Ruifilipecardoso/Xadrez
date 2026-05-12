@@ -57,7 +57,7 @@ void desenhar_peca(int y, int x, int tipo, int cor, int cursor_y, int cursor_x, 
 
     cor_peca(cor, y, x, cursor_y, cursor_x, selecionado_y, selecionado_x);
 
-    int screen_y = MARGEM_Y + (y * ALTURA_CASA) + 0;
+    int screen_y = MARGEM_Y + (y * ALTURA_CASA) + 0 + 2;
     int screen_x = MARGEM_X + (x * LARGURA_CASA) + 0;
 
     //attron(A_BOLD);

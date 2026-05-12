@@ -5,7 +5,7 @@
 
 //A matriz externa para que todos os ficheiros a vejam
 extern int tabuleiro_estado[8][8];
-extern int turno_atual = BRANCO;
+extern int turno_atual;
 
 //Funções de lógica
 void inicializar_jogo();

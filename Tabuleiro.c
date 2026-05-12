@@ -28,6 +28,25 @@ void inicializar_cores() {
     init_pair(6, COLOR_RED, COLOR_WHITE);
 }
 
+//Turnos
+void mostrar_status() {
+    //Apagar mensagem anterior
+    move(2, 0);
+    clrtoeol();
+
+    if (turno_atual == BRANCO) {
+        attron(COLOR_PAIR(4));
+        mvprintw(2, 5, "VES DAS BRANCAS");
+        attroff(COLOR_PAIR(4));
+    } else {
+        attron(COLOR_PAIR(5));
+        mvprintw(2, 5, "VEZ DAS PRETAS");
+        attroff(COLOR_PAIR(5));
+    }
+
+    refresh();
+}
+
 //Grelha
 void desenhar_grelha(int cursor_y, int cursor_x, int selecionado_y, int selecionado_x) {
     for (int y = 0; y < 8; y++) {
@@ -50,7 +69,7 @@ void desenhar_grelha(int cursor_y, int cursor_x, int selecionado_y, int selecion
 
             //Desenha a casa
             for (int i = 0; i < ALTURA_CASA; i++) {
-                mvprintw(MARGEM_Y + (y * ALTURA_CASA) + i, MARGEM_X + (x * LARGURA_CASA), "  ");
+                mvprintw(MARGEM_Y + (y * ALTURA_CASA) + i + 2, MARGEM_X + (x * LARGURA_CASA), "  ");
             }
 
             attroff(COLOR_PAIR(cor_da_casa));

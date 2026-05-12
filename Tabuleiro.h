@@ -10,6 +10,9 @@
 #define MARGEM_X 5
 
 void inicializar_cores();
+
+void mostrar_status();
+
 void desenhar_grelha(int cursor_y, int cursor_x, int selecionado_y, int selecionado_x);
 
 #endif

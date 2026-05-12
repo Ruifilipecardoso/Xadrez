@@ -146,7 +146,10 @@ int validar_movimento(int oy, int ox, int dy, int dx) {
     int tipo = peca % 10;
     int cor = (peca >= 20) ? PRETO : BRANCO;
 
-    //Regra nº1: Não pode comer as peças da mesma cor.
+    //Regra nº1: Só pode mover as peças da cor do turno atual.
+    if (cor != turno_atual) return 0;
+
+    //Regra nº2: Não pode comer as peças da mesma cor.
     int peca_destino = tabuleiro_estado[dy][dx];
     if (peca_destino != VAZIO) {
         int cor_destino = (peca_destino >= 20) ? PRETO : BRANCO;
@@ -178,5 +181,13 @@ void mover_peca(int oy, int ox, int dy, int dx) {
     //Promoção do peão
     if (tipo == PEAO && (dy == 0 || dy == 7)) {
         tabuleiro_estado[dy][dx] = RAINHA + cor;
+    }
+
+    //Alternar o turno
+    if (turno_atual == BRANCO) {
+        turno_atual = PRETO;
+        
+    } else {
+        turno_atual = BRANCO;
     }
 }

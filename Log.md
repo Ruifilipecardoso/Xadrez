@@ -197,3 +197,21 @@ Implementar as regras do Turno
 
 **Linhas de código escritas (estimativa):**
 ~100
+
+## == Sessão 5 – 12/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Turnos
+- ...
+
+**Maior dificuldade:**
+Não tive nenhuma dificuldade significativa.
+
+**Como resolvi (ou não resolvi):**
+...
+
+**Próximo passo planeado:**
+Implementar o Xeque e Xeque-Mate
+
+**Linhas de código escritas (estimativa):**
+~50

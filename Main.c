@@ -35,7 +35,16 @@ int main() {
 
     keypad(stdscr, TRUE);
 
-    while((ch = getch()) != 'q') {
+    while(1) {
+
+        mostrar_status();
+        desenhar_grelha(cursor_y, cursor_x, selecionado_y, selecionado_x);
+        refresh();
+
+
+        ch = getch();
+        if (ch == 'q') break;
+
         switch(ch) {
             case KEY_UP: if(cursor_y > 0) cursor_y--; break;
             case KEY_DOWN: if(cursor_y < 7) cursor_y++; break;
@@ -58,9 +67,9 @@ int main() {
                 }
                 break;
         }
-        desenhar_grelha(cursor_y, cursor_x, selecionado_y, selecionado_x);
+        
 
-        refresh();
+        
     }
 
     mvprintw(MARGEM_Y + (8 * ALTURA_CASA) + 1, MARGEM_X, "Pressiona qualquer tecla para sair...");
