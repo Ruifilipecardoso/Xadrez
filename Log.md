@@ -179,3 +179,21 @@ Implementar as regras do Bispo
 
 **Linhas de código escritas (estimativa):**
 ~50
+
+## == Sessão 5 – 12/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Movimento das Peças finalizada
+- ...
+
+**Maior dificuldade:**
+Não tive nenhuma dificuldade significativa.
+
+**Como resolvi (ou não resolvi):**
+...
+
+**Próximo passo planeado:**
+Implementar as regras do Turno
+
+**Linhas de código escritas (estimativa):**
+~100
