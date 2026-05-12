@@ -66,6 +66,27 @@ int validar_peao(int oy, int ox, int dy, int dx, int cor) {
     return 0;
 }
 
+int validar_torre(int oy, int ox, int dy, int dx) {
+    //A Torre só move se apenas modar o x ou o y.
+    if (oy != dy && ox != dx) return 0;
+
+    //Verificara se o caminho está livre.
+    int passo_y = (dy > oy) ? 1 : (dy < oy) ? -1 : 0;
+    int passo_x = (dx > ox) ? 1 : (dx < ox) ? -1 : 0;
+
+    int cur_y = oy + passo_y;
+    int cur_x = ox + passo_x;
+
+    while (cur_y != dy || cur_x != dx) {
+        if (tabuleiro_estado[cur_y][cur_x] != VAZIO) return 0;
+        cur_y += passo_y;
+        cur_x += passo_x;
+    }
+
+    return 1;
+
+}
+
 int validar_movimento(int oy, int ox, int dy, int dx) {
     int peca = tabuleiro_estado[oy][ox];
     int tipo = peca % 10;
@@ -81,11 +102,11 @@ int validar_movimento(int oy, int ox, int dy, int dx) {
     //Regra por Peça.
     switch(tipo) {
         case PEAO: return validar_peao(oy, ox, dy, dx, cor);
-        /*case TORRE: return validar_torre(oy, ox, dy, dx);
-        case CAVALO: return validar_cavalo(oy, ox, dy, dx);
-        case BISPO: return validar_bispo(oy, ox, dy, dx);
-        case RAINHA: return validar_rainha(oy, ox, dy, dx);
-        case REI: return validar_rei(oy, ox, dy, dx);*/
+        case TORRE: return validar_torre(oy, ox, dy, dx);
+        //case CAVALO: return validar_cavalo(oy, ox, dy, dx);
+        //case BISPO: return validar_bispo(oy, ox, dy, dx);
+        //case RAINHA: return validar_rainha(oy, ox, dy, dx);
+        //case REI: return validar_rei(oy, ox, dy, dx);
     }
     return 0;
 }
