@@ -86,6 +86,20 @@ int main() {
                             mover_peca(selecionado_y, selecionado_x, cursor_y, cursor_x);
                             mvprintw(1, 5, "                               ");
                         }
+
+                        if (xeque_mate(turno_atual) == 1) {
+                            erase();
+                            mvprintw(4, 5, "=================================");
+                            if (turno_atual == BRANCO) {
+                                mvprintw(5, 5, "XEQUE-MATE! VITORIA DAS PRETAS! ");
+                            } else {
+                                mvprintw(5, 5, "XEQUE-MATE! VITORIA DAS BRANCAS!");
+                            }
+                            mvprintw(6, 5, "=================================");
+                            refresh();
+                            getch();
+                            break;
+                        }
                         
                         selecionado_x = -1;
                         

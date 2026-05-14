@@ -251,3 +251,21 @@ Implementar o Xeque-Mate
 
 **Linhas de código escritas (estimativa):**
 ~100
+
+## == Sessão 6 – 14/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Implementei o Xeque-Mate
+- ...
+
+**Maior dificuldade:**
+Não tive nenhuma dificuldade significativa.
+
+**Como resolvi (ou não resolvi):**
+...
+
+**Próximo passo planeado:**
+Implementar o funcionalidades extras
+
+**Linhas de código escritas (estimativa):**
+~100

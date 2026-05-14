@@ -84,6 +84,49 @@ void encontrar_rei (int cor, int *rei_y, int *rei_x) {
     }
 }
 
+int xeque_mate(int cor_atual) {
+    int rei_y, rei_x;
+    encontrar_rei(cor_atual, &rei_y, &rei_x);
+
+    if (xeque(rei_y, rei_x, cor_atual) == 0) {return 0;}
+
+    for (int oy = 0; oy < 8; oy++) {
+        for (int ox = 0; ox < 8; ox++) {
+            int peca = tabuleiro_estado[oy][ox];
+            if (peca != VAZIO) {
+                int cor_peca = (peca >= 20) ? PRETO : BRANCO;
+
+                if (cor_peca == cor_atual) {
+                    for (int dy = 0; dy < 8; dy++) {
+                        for (int dx = 0; dx < 8; dx++) {
+                            if (validar_movimento(oy, ox, dy, dx) == 1) {
+                                int peca_origem = tabuleiro_estado[oy][ox];
+                                int peca_destino = tabuleiro_estado[dy][dx];
+
+                                tabuleiro_estado[dy][dx] = peca_origem;
+                                tabuleiro_estado[oy][ox] = VAZIO;
+
+                                int novo_rei_y, novo_rei_x;
+                                encontrar_rei(cor_atual, &novo_rei_y, &novo_rei_x);
+                                int ainda_em_xeque = xeque(novo_rei_y, novo_rei_x, cor_atual);
+
+                                tabuleiro_estado[oy][ox] = peca_origem;
+                                tabuleiro_estado[dy][dx] = peca_destino;
+
+                                if (ainda_em_xeque == 0) {
+                                    return 0;//Apenas Xeque
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return 1;//Xeque Mate
+}
+
 int validar_peao(int oy, int ox, int dy, int dx, int cor) {
     int direcao = (cor == BRANCO) ? -1 : 1;
 
