@@ -58,10 +58,37 @@ int main() {
                     selecionado_x = cursor_x;
                 } else {
                     if (validar_movimento(selecionado_y, selecionado_x, cursor_y, cursor_x) == 1) {
-                        //S
-                        //Mover Peça
-                        mover_peca(selecionado_y, selecionado_x, cursor_y, cursor_x);
+                        //--- Simulação de Xeque ---
+                        //Guardar o estado original das duas casas envolvidas
+                        int peca_origem = tabuleiro_estado[selecionado_y][selecionado_x];
+                        int peca_destino = tabuleiro_estado[cursor_y][cursor_x];
+
+                        //Jogada fantasma
+                        tabuleiro_estado[cursor_y][cursor_x] = peca_origem;
+                        tabuleiro_estado[selecionado_y][selecionado_x] = VAZIO;
+
+                        //Localização do Rei
+                        int rei_y, rei_x;
+                        encontrar_rei(turno_atual, &rei_y, &rei_x);
+
+                        //Verificar se Xeque
+                        int rei_em_xeque = xeque(rei_y, rei_x, turno_atual);
+
+                        //Desfazer a jogada fantasma
+                        tabuleiro_estado[selecionado_y][selecionado_x] = peca_origem;
+                        tabuleiro_estado[cursor_y][cursor_x] = peca_destino;
+                        //--- Fim da simulação ---
+
+                        if (rei_em_xeque == 1) {
+                            mvprintw(1, 5, "MOVIMENTO ILEGAL: REI EM XEQUE!");
+                        } else {
+                            //Mover Peça
+                            mover_peca(selecionado_y, selecionado_x, cursor_y, cursor_x);
+                            mvprintw(1, 5, "                               ");
+                        }
+                        
                         selecionado_x = -1;
+                        
                     } else {
                         selecionado_x = -1;
                     }
