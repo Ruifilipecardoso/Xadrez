@@ -39,6 +39,51 @@ void inicializar_jogo() {
     tabuleiro_estado[7][7] = TORRE + BRANCO;
 }
 
+int xeque(int target_y, int target_x, int cor_defensora) {
+    int cor_atacante = (cor_defensora == BRANCO) ? PRETO : BRANCO;
+
+    //Procurar peças inimigas
+    for (int y = 0; y < 8; y++) {
+        for (int x = 0; x < 8; x++) {
+            int peca = tabuleiro_estado[y][x];
+            if (peca != VAZIO) {
+                int cor_peca = (peca >= 20) ? PRETO : BRANCO;
+
+                if (cor_peca == cor_atacante) {
+                    int turno_salvo = turno_atual;
+                    turno_atual = cor_atacante;
+
+                    if (validar_movimento(y, x, target_y, target_x) == 1) {
+                        turno_atual = turno_salvo;
+                        return 1; //Xeque
+                    }
+                    turno_atual = turno_salvo;
+                }
+            }
+            
+        }
+    }
+    return 0;
+}
+
+void encontrar_rei (int cor, int *rei_y, int *rei_x) {
+    for (int y = 0; y < 8; y++) {
+        for (int x = 0; x < 8; x++) {
+            int peca = tabuleiro_estado[y][x];
+            if (peca != VAZIO) {
+                int tipo = peca % 10;
+                int cor_peca = (peca >= 20) ? PRETO : BRANCO;
+
+                if (tipo == REI && cor_peca == cor) {
+                    *rei_y = y;
+                    *rei_x = x;
+                    return;
+                }
+            }
+        }
+    }
+}
+
 int validar_peao(int oy, int ox, int dy, int dx, int cor) {
     int direcao = (cor == BRANCO) ? -1 : 1;
 

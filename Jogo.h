@@ -10,6 +10,10 @@ extern int turno_atual;
 //Funções de lógica
 void inicializar_jogo();
 
+int xeque(int target_y, int target_x, int cor_defensora);
+
+void encontrar_rei (int cor, int *rei_y, int *rei_x);
+
 int validar_peao(int oy, int ox, int dy, int dx, int cor);
 
 int validar_torre(int oy, int ox, int dy, int dx);

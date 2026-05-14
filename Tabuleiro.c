@@ -30,13 +30,14 @@ void inicializar_cores() {
 
 //Turnos
 void mostrar_status() {
+    SetConsoleOutputCP(65001);
     //Apagar mensagem anterior
     move(2, 0);
     clrtoeol();
 
     if (turno_atual == BRANCO) {
         attron(COLOR_PAIR(4));
-        mvprintw(2, 5, "VES DAS BRANCAS");
+        mvprintw(2, 5, "VEZ DAS BRANCAS");
         attroff(COLOR_PAIR(4));
     } else {
         attron(COLOR_PAIR(5));

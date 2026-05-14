@@ -51,12 +51,14 @@ int main() {
             case KEY_LEFT: if(cursor_x > 0) cursor_x--; break;
             case KEY_RIGHT: if(cursor_x < 7) cursor_x++; break;
 
-            case '\n': if(selecionado_x == -1) {
+            case '\n': 
+                if(selecionado_x == -1) {
                     //Selecionar Peça
                     selecionado_y = cursor_y;
                     selecionado_x = cursor_x;
                 } else {
                     if (validar_movimento(selecionado_y, selecionado_x, cursor_y, cursor_x) == 1) {
+                        //S
                         //Mover Peça
                         mover_peca(selecionado_y, selecionado_x, cursor_y, cursor_x);
                         selecionado_x = -1;
