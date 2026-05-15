@@ -287,3 +287,21 @@ Implementar o movimento especial do peão
 
 **Linhas de código escritas (estimativa):**
 ~200
+
+## == Sessão 7 – 15/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Implementei o En-Passant
+- ...
+
+**Maior dificuldade:**
+Memória entre jogadas
+
+**Como resolvi (ou não resolvi):**
+Criei uma variável extern
+
+**Próximo passo planeado:**
+Implementar a transformação do peão
+
+**Linhas de código escritas (estimativa):**
+~50

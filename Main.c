@@ -129,6 +129,12 @@ int main() {
                             //Mover Peça
                             mover_peca(selecionado_y, selecionado_x, cursor_y, cursor_x);
 
+                            int peca_movida = tabuleiro_estado[cursor_y][cursor_x];
+
+                            if (peca_movida % 10 == PEAO && abs(cursor_x - selecionado_x) == 1 && peca_destino == VAZIO) {
+                                tabuleiro_estado[selecionado_y][cursor_x] = VAZIO;
+                            }
+
                             mvprintw(1, 5, "                               ");
 
                             if (xeque_mate(turno_atual) == 1) {

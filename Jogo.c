@@ -11,6 +11,8 @@ int torre_branca_dir_moveu = 0;
 int torre_preta_esq_moveu = 0;  
 int torre_preta_dir_moveu = 0;
 
+int en_passant_coluna = -1;
+
 void inicializar_jogo() {
     //Limpar tabuleiro
     for(int y = 0; y < 8; y++) {
@@ -136,6 +138,9 @@ int xeque_mate(int cor_atual) {
 
 int validar_peao(int oy, int ox, int dy, int dx, int cor) {
     int direcao = (cor == BRANCO) ? -1 : 1;
+    int diff_x = dx - ox;
+    int diff_y = dy - oy;
+    
 
     //Movimento simples (1 casa à frente)
     if (ox == dx && dy == oy + direcao && tabuleiro_estado[dy][dx] == VAZIO) {
@@ -152,10 +157,18 @@ int validar_peao(int oy, int ox, int dy, int dx, int cor) {
     }
 
     //Comer (Diagonal)
-    if (abs(ox - dx) == 1 && dy == oy + direcao) {
+    if (abs(diff_x) == 1 && diff_y == direcao) {
         int peca_destino = tabuleiro_estado[dy][dx];
+        
         if (peca_destino != VAZIO) {
             return 1;
+        } else {
+            //En-Passant
+            if (dx == en_passant_coluna) {
+                if ((cor == BRANCO && oy == 3) || (cor == PRETO && oy == 4)) {
+                    return 1;
+                }
+            }
         }
     }
 
@@ -305,6 +318,12 @@ void mover_peca(int oy, int ox, int dy, int dx) {
     int tipo = peca % 10;
     int cor = (peca >= 20) ? PRETO : BRANCO;
 
+    int proxima_coluna_enpa = -1;
+
+    if (tipo == PEAO && abs(dy - oy) == 2) {
+        proxima_coluna_enpa = ox;
+    }
+
     //Atualizar histórico para impedir Roque futuro
     if (tipo == REI) {
         if (cor == BRANCO) rei_branco_moveu = 1;
@@ -332,6 +351,8 @@ void mover_peca(int oy, int ox, int dy, int dx) {
     if (tipo == PEAO && (dy == 0 || dy == 7)) {
         tabuleiro_estado[dy][dx] = RAINHA + cor;
     }
+
+    en_passant_coluna = proxima_coluna_enpa;
 
     //Alternar o turno
     if (turno_atual == BRANCO) {

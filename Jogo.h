@@ -7,6 +7,8 @@
 extern int tabuleiro_estado[8][8];
 extern int turno_atual;
 
+extern int en_passant_coluna;
+
 
 //Funções de lógica
 void inicializar_jogo();
