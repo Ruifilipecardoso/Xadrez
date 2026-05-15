@@ -323,3 +323,21 @@ Melhorar a qualidade de vida do joga
 
 **Linhas de código escritas (estimativa):**
 ~50
+
+## == Sessão 7 – 15/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Implementei a sinalização das possívei jogadas que o jogador pode fazer
+- E implementei o número e letras das casas
+
+**Maior dificuldade:**
+Sinalizar o Roque
+
+**Como resolvi (ou não resolvi):**
+...
+
+**Próximo passo planeado:**
+Talvez pôr uma IA, mas acho que terminei.
+
+**Linhas de código escritas (estimativa):**
+~100

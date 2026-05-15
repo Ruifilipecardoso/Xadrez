@@ -17,7 +17,9 @@ void inicializar_cores() {
     init_pair(2, COLOR_WHITE, COLOR_WHITE);
 
     init_pair(7, COLOR_BLACK, COLOR_YELLOW);
-    init_pair(8, COLOR_BLACK, COLOR_GREEN);
+    init_pair(8, COLOR_BLACK, COLOR_MAGENTA);
+    init_pair(9, COLOR_BLACK, COLOR_GREEN);
+    init_pair(10, COLOR_BLACK, COLOR_RED);
 
     //Com as peças brancas
     init_pair(3, COLOR_YELLOW, COLOR_BLUE);
@@ -58,6 +60,33 @@ void desenhar_grelha(int cursor_y, int cursor_x, int selecionado_y, int selecion
                 cor_da_casa = 7;
             } else if (y == selecionado_y && x == selecionado_x) {
                 cor_da_casa = 8;
+            } else if ( selecionado_x != -1 && validar_movimento(selecionado_y, selecionado_x, y, x) == 1 || (tabuleiro_estado[selecionado_y][selecionado_x] % 10 == REI && abs(x - selecionado_x) == 2 && y == selecionado_y && validar_roque(selecionado_y, selecionado_x, y, x) == 1)) {
+
+                int peca_origem = tabuleiro_estado[selecionado_y][selecionado_x];
+                int peca_destino = tabuleiro_estado[y][x];
+
+                tabuleiro_estado[y][x] = peca_origem;
+                tabuleiro_estado[selecionado_y][selecionado_x] = VAZIO;
+
+                int rei_y, rei_x;
+                encontrar_rei(turno_atual, &rei_y, &rei_x);
+                int rei_em_xeque = xeque(rei_y, rei_x, turno_atual);
+
+                tabuleiro_estado[selecionado_y][selecionado_x] = peca_origem;
+                tabuleiro_estado[y][x] = peca_destino;
+
+                if (rei_em_xeque == 0) {
+                    if (tabuleiro_estado[y][x] != VAZIO) {
+                        cor_da_casa = 10;
+                    } else {
+                        cor_da_casa = 9;
+                    }
+                    
+                } else {
+                    if ((x + y) % 2 == 0) cor_da_casa = 1;
+                    else cor_da_casa = 2;
+                }
+            
             } else if ((x + y) % 2 == 0) {
                 cor_da_casa = 1;
             } else {
@@ -85,8 +114,28 @@ void desenhar_grelha(int cursor_y, int cursor_x, int selecionado_y, int selecion
 
                 desenhar_peca(y, x, tipo, cor, cursor_y, cursor_x, selecionado_y, selecionado_x);
             }
-
-
         }
+    }
+
+    //Desenhar as letras
+    for (int x = 0; x < 8; x++) {
+        char letra = 'A' + x;
+
+        int pos_x = MARGEM_X + (x * LARGURA_CASA) + (LARGURA_CASA / 2);
+
+        mvprintw(MARGEM_Y + 1, pos_x, "%c", letra);
+
+        mvprintw(MARGEM_Y + (8 * ALTURA_CASA) + 2, pos_x, "%c", letra);
+    }
+
+    //Desenhar os números
+    for (int y = 0; y < 8; y++) {
+        int numero = 8 - y;
+
+        int pos_y = MARGEM_Y + (y * ALTURA_CASA) + (ALTURA_CASA / 2) + 2;
+
+        mvprintw(pos_y, MARGEM_X - 2, "%d", numero);
+
+        mvprintw(pos_y, MARGEM_X + (8 * LARGURA_CASA) + 2, "%d", numero);
     }
 }
