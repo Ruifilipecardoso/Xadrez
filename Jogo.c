@@ -4,6 +4,13 @@
 int tabuleiro_estado[8][8];
 int turno_atual = BRANCO;
 
+int rei_branco_moveu = 0;
+int rei_preto_moveu = 0;
+int torre_branca_esq_moveu = 0; 
+int torre_branca_dir_moveu = 0; 
+int torre_preta_esq_moveu = 0;  
+int torre_preta_dir_moveu = 0;
+
 void inicializar_jogo() {
     //Limpar tabuleiro
     for(int y = 0; y < 8; y++) {
@@ -15,8 +22,8 @@ void inicializar_jogo() {
     tabuleiro_estado[0][0] = TORRE + PRETO;
     tabuleiro_estado[0][1] = CAVALO + PRETO;
     tabuleiro_estado[0][2] = BISPO + PRETO;
-    tabuleiro_estado[0][3] = REI + PRETO;
-    tabuleiro_estado[0][4] = RAINHA + PRETO;
+    tabuleiro_estado[0][3] = RAINHA + PRETO;
+    tabuleiro_estado[0][4] = REI + PRETO;
     tabuleiro_estado[0][5] = BISPO + PRETO;
     tabuleiro_estado[0][6] = CAVALO + PRETO;
     tabuleiro_estado[0][7] = TORRE + PRETO;
@@ -32,8 +39,8 @@ void inicializar_jogo() {
     tabuleiro_estado[7][0] = TORRE + BRANCO;
     tabuleiro_estado[7][1] = CAVALO + BRANCO;
     tabuleiro_estado[7][2] = BISPO + BRANCO;
-    tabuleiro_estado[7][3] = REI + BRANCO;
-    tabuleiro_estado[7][4] = RAINHA + BRANCO;
+    tabuleiro_estado[7][3] = RAINHA + BRANCO;
+    tabuleiro_estado[7][4] = REI + BRANCO;
     tabuleiro_estado[7][5] = BISPO + BRANCO;
     tabuleiro_estado[7][6] = CAVALO + BRANCO;
     tabuleiro_estado[7][7] = TORRE + BRANCO;
@@ -217,9 +224,46 @@ int validar_rainha(int oy, int ox, int dy, int dx) {
     return 0;
 }
 
-int validar_rei(int oy, int ox, int dy, int dx) {
+int validar_rei_basico(int oy, int ox, int dy, int dx) {
     int diff_x = abs(dx - ox);
     int diff_y = abs(dy - oy);
+    if (diff_x <= 1 && diff_y <= 1) {
+        return 1;
+    }
+    return 0;
+}
+
+int validar_roque(int oy, int ox, int dy, int dx) {
+    int diff_x = dx - ox;
+    int diff_y = dy - oy;
+
+    if (diff_y == 0 && abs(diff_x) == 2) {
+        int cor = (tabuleiro_estado[oy][ox] >= 20) ? PRETO : BRANCO;
+
+        if (cor == BRANCO && rei_branco_moveu) return 0;
+        if (cor == PRETO && rei_preto_moveu) return 0;
+        if (xeque(oy, ox, cor)) return 0;
+
+        if (diff_x == -2) {
+            if (cor == BRANCO && torre_branca_esq_moveu) return 0;
+            if (cor == PRETO && torre_preta_esq_moveu) return 0;
+
+            if (tabuleiro_estado[oy][1] != VAZIO || tabuleiro_estado[oy][2] != VAZIO || tabuleiro_estado[oy][3] != VAZIO) return 0;
+            if (xeque(oy, 2, cor) || xeque(oy, 3, cor)) return 0;
+
+            return 1;
+        }
+
+        if (diff_x == 2) {
+            if (cor == BRANCO && torre_branca_dir_moveu) return 0;
+            if (cor == PRETO && torre_preta_dir_moveu) return 0;
+
+            if (tabuleiro_estado[oy][5] != VAZIO || tabuleiro_estado[oy][6] != VAZIO) return 0;
+            if (xeque(oy, 5, cor) || xeque(oy, 6, cor)) return 0;
+
+            return 1;
+        }
+    }
 
     //Movimento para a casa adjacente
     if (diff_x <= 1 && diff_y <= 1) {
@@ -251,20 +295,38 @@ int validar_movimento(int oy, int ox, int dy, int dx) {
         case CAVALO: return validar_cavalo(oy, ox, dy, dx);
         case BISPO: return validar_bispo(oy, ox, dy, dx);
         case RAINHA: return validar_rainha(oy, ox, dy, dx);
-        case REI: return validar_rei(oy, ox, dy, dx);
+        case REI: return validar_rei_basico(oy, ox, dy, dx);
     }
     return 0;
 }
 
 void mover_peca(int oy, int ox, int dy, int dx) {
+    int peca = tabuleiro_estado[oy][ox];
+    int tipo = peca % 10;
+    int cor = (peca >= 20) ? PRETO : BRANCO;
+
+    //Atualizar histórico para impedir Roque futuro
+    if (tipo == REI) {
+        if (cor == BRANCO) rei_branco_moveu = 1;
+        else rei_preto_moveu = 1;
+    }
+    if (tipo == TORRE) {
+        if (cor == BRANCO) {
+            if (ox == 0) torre_branca_esq_moveu = 1;
+            if (ox == 7) torre_branca_dir_moveu = 1;
+        } else {
+            if (ox == 0) torre_preta_esq_moveu = 1;
+            if (ox == 7) torre_preta_dir_moveu = 1;
+        }
+    }
     //Mover a Peça
     tabuleiro_estado[dy][dx] = tabuleiro_estado[oy][ox];
     tabuleiro_estado[oy][ox] = VAZIO;
 
     //Extrai as informações da peça que moveu
     int peca_movida = tabuleiro_estado[dy][dx];
-    int tipo = peca_movida % 10;
-    int cor = (peca_movida >= 20) ? PRETO : BRANCO;
+    tipo = peca_movida % 10;
+    cor = (peca_movida >= 20) ? PRETO : BRANCO;
 
     //Promoção do peão
     if (tipo == PEAO && (dy == 0 || dy == 7)) {

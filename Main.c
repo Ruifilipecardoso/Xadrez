@@ -36,7 +36,7 @@ int main() {
     keypad(stdscr, TRUE);
 
     while(1) {
-
+        
         mostrar_status();
         desenhar_grelha(cursor_y, cursor_x, selecionado_y, selecionado_x);
         refresh();
@@ -57,6 +57,50 @@ int main() {
                     selecionado_y = cursor_y;
                     selecionado_x = cursor_x;
                 } else {
+
+                    int peca_selecionada = tabuleiro_estado[selecionado_y][selecionado_x];
+                    int tipo_peca = peca_selecionada % 10;
+
+                    //Tentativa de Roque
+                    int cor_rei = (peca_selecionada >= 20) ? PRETO : BRANCO;
+                    if (cor_rei == turno_atual && tipo_peca == REI && abs(cursor_x - selecionado_x) == 2) {
+                        if (validar_roque(selecionado_y, selecionado_x, cursor_y, cursor_x) == 1) {
+                            mover_peca(selecionado_y, selecionado_x, cursor_y, cursor_x);
+
+                            if (cursor_x == 6) {
+                                    tabuleiro_estado[cursor_y][5] = tabuleiro_estado[cursor_y][7];
+                                    tabuleiro_estado[cursor_y][7] = VAZIO;
+                                }
+                            if (cursor_x == 2) {
+                                tabuleiro_estado[cursor_y][3] = tabuleiro_estado[cursor_y][0];
+                                tabuleiro_estado[cursor_y][0] = VAZIO;
+                            }
+
+                            mvprintw(1, 5, "                               ");
+
+                            if (xeque_mate(turno_atual) == 1) {
+                                erase();
+                                mvprintw(4, 5, "=================================");
+                                if (turno_atual == BRANCO) {
+                                    mvprintw(5, 5, "XEQUE-MATE! VITORIA DAS PRETAS! ");
+                                } else {
+                                    mvprintw(5, 5, "XEQUE-MATE! VITORIA DAS BRANCAS!");
+                                }
+                                mvprintw(6, 5, "=================================");
+                                refresh();
+                                getch();
+                                break;
+                            }
+
+                        } else {
+                            mvprintw(1, 5, "MOVIMENTO ILEGAL: ROQUE INVALIDO!");
+                        }
+
+                        selecionado_x = -1;
+                    } else {
+
+                    }
+
                     if (validar_movimento(selecionado_y, selecionado_x, cursor_y, cursor_x) == 1) {
                         //--- Simulação de Xeque ---
                         //Guardar o estado original das duas casas envolvidas
@@ -84,34 +128,32 @@ int main() {
                         } else {
                             //Mover Peça
                             mover_peca(selecionado_y, selecionado_x, cursor_y, cursor_x);
-                            mvprintw(1, 5, "                               ");
-                        }
 
-                        if (xeque_mate(turno_atual) == 1) {
-                            erase();
-                            mvprintw(4, 5, "=================================");
-                            if (turno_atual == BRANCO) {
-                                mvprintw(5, 5, "XEQUE-MATE! VITORIA DAS PRETAS! ");
-                            } else {
-                                mvprintw(5, 5, "XEQUE-MATE! VITORIA DAS BRANCAS!");
+                            mvprintw(1, 5, "                               ");
+
+                            if (xeque_mate(turno_atual) == 1) {
+                                erase();
+                                mvprintw(4, 5, "=================================");
+                                if (turno_atual == BRANCO) {
+                                    mvprintw(5, 5, "XEQUE-MATE! VITORIA DAS PRETAS! ");
+                                } else {
+                                    mvprintw(5, 5, "XEQUE-MATE! VITORIA DAS BRANCAS!");
+                                }
+                                mvprintw(6, 5, "=================================");
+                                refresh();
+                                getch();
+                                break;
                             }
-                            mvprintw(6, 5, "=================================");
-                            refresh();
-                            getch();
-                            break;
+
                         }
-                        
                         selecionado_x = -1;
                         
                     } else {
                         selecionado_x = -1;
                     }
-                    
                 }
                 break;
         }
-        
-
         
     }
 

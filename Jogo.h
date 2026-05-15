@@ -7,6 +7,7 @@
 extern int tabuleiro_estado[8][8];
 extern int turno_atual;
 
+
 //Funções de lógica
 void inicializar_jogo();
 
@@ -26,7 +27,9 @@ int validar_bispo(int oy, int ox, int dy, int dx);
 
 int validar_rainha(int oy, int ox, int dy, int dx);
 
-int validar_rei(int oy, int ox, int dy, int dx);
+int validar_rei_basico(int oy, int ox, int dy, int dx);
+
+int validar_roque(int oy, int ox, int dy, int dx);
 
 int validar_movimento(int oy, int ox, int dy, int dx);
 

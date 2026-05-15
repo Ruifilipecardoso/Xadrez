@@ -269,3 +269,21 @@ Implementar o funcionalidades extras
 
 **Linhas de código escritas (estimativa):**
 ~100
+
+## == Sessão 6 – 14/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Implementei o Roque
+- ...
+
+**Maior dificuldade:**
+Entender como poderia ser feito
+
+**Como resolvi (ou não resolvi):**
+Detetar se a torre e o rei nunca se mexeram
+
+**Próximo passo planeado:**
+Implementar o movimento especial do peão
+
+**Linhas de código escritas (estimativa):**
+~200
