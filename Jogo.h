@@ -35,6 +35,8 @@ int validar_roque(int oy, int ox, int dy, int dx);
 
 int validar_movimento(int oy, int ox, int dy, int dx);
 
+int obter_peca_promocao();
+
 void mover_peca(int oy, int ox, int dy, int dx);
 
 

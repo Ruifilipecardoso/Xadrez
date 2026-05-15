@@ -313,6 +313,26 @@ int validar_movimento(int oy, int ox, int dy, int dx) {
     return 0;
 }
 
+int obter_peca_promocao() {
+    mvprintw(0, 0, "                                                                ");
+    mvprintw(1, 0, "                                                                ");
+
+    mvprintw(0, 0, "PROMOCAO! Escolha uma peca:");
+    mvprintw(1, 0, "[R] Rainha  [T] Torre  [B] Bispo  [C] Cavalo");
+    refresh();
+
+    while (1) {
+        int tecla = getch();
+        switch (tecla) {
+            case 'r': case 'R': return RAINHA;
+            case 't': case 'T': return TORRE;
+            case 'b': case 'B': return BISPO;
+            case 'c': case 'C': return CAVALO;
+                
+        }
+    }
+}
+
 void mover_peca(int oy, int ox, int dy, int dx) {
     int peca = tabuleiro_estado[oy][ox];
     int tipo = peca % 10;
@@ -342,14 +362,15 @@ void mover_peca(int oy, int ox, int dy, int dx) {
     tabuleiro_estado[dy][dx] = tabuleiro_estado[oy][ox];
     tabuleiro_estado[oy][ox] = VAZIO;
 
-    //Extrai as informações da peça que moveu
-    int peca_movida = tabuleiro_estado[dy][dx];
-    tipo = peca_movida % 10;
-    cor = (peca_movida >= 20) ? PRETO : BRANCO;
-
+    
     //Promoção do peão
     if (tipo == PEAO && (dy == 0 || dy == 7)) {
-        tabuleiro_estado[dy][dx] = RAINHA + cor;
+        int nova_peca_tipo = obter_peca_promocao();
+
+        tabuleiro_estado[dy][dx] = nova_peca_tipo + cor;
+
+        mvprintw(0, 0, "                                                                ");
+        mvprintw(1, 0, "                                                                ");
     }
 
     en_passant_coluna = proxima_coluna_enpa;

@@ -305,3 +305,21 @@ Implementar a transformação do peão
 
 **Linhas de código escritas (estimativa):**
 ~50
+
+## == Sessão 7 – 15/05/2026 ==
+
+**Funcionalidades implementadas:**
+- Implementei a promoção do Peão
+- ...
+
+**Maior dificuldade:**
+Criar um menu interativo para escolher a peça
+
+**Como resolvi (ou não resolvi):**
+usei o getch() e o menu switch
+
+**Próximo passo planeado:**
+Melhorar a qualidade de vida do joga
+
+**Linhas de código escritas (estimativa):**
+~50
